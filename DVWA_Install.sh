@@ -63,8 +63,14 @@ cd /etc/php/7.2/apache2
 sed -i 's/allow_url_include = Off/allow_url_include = On/g' php.ini
 
 chmod -R 755 /var/www/html/dvwa
+cd /var/www/html/dvwa/config
 echo -e "${GREEN}[+] Time to initialize the database${NC}"
-mysql -u root  -Bse "create database dvwa; exit;" 2>/dev/null
+mysql -u root -Bse "create database dvwa;"
+mysql -u root -Bse "create user 'dvwa'@'localhost' identified by 'dvwa';"
+mysql -u root -Bse "grant all privileges on * . * to 'dvwa'@'localhost';"
+mysql -u root -Bse "flush privileges;"
+sed -i "s/\$_DVWA\[ 'db_user' ]     = 'root';/\$_DVWA\[ 'db_user' ]     = 'dvwa';/g" config.inc.php
+sed -i "s/\$_DVWA\[ 'db_password' ] = 'p@ssw0rd';/\$_DVWA\[ 'db_password' ] = 'dvwa';/g" config.inc.php
 
 echo -e "${GREEN}[+] Appending server name to apache2.conf${NC}"
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
