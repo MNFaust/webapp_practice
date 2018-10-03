@@ -80,4 +80,3 @@ service apache2 start
 echo -e "${GREEN}[+] Navigating to DVWA setup page${NC}"
 echo -e "${GREEN}[+] Done${NC}"
 exit 0
-	
