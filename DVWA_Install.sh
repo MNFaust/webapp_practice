@@ -75,7 +75,7 @@ sed -i "s/\$_DVWA\[ 'db_password' ] = 'p@ssw0rd';/\$_DVWA\[ 'db_password' ] = 'd
 echo -e "${GREEN}[+] Appending server name to apache2.conf${NC}"
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 echo -e "${GREEN}[+] Starting Apache2 service${NC}"
-service apache2 start
+service apache2 restart
 
 echo -e "${GREEN}[+] Navigating to DVWA setup page${NC}"
 echo -e "${GREEN}[+] Done${NC}"
